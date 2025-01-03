@@ -1,0 +1,143 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:models="using:WeatherApp.Models"
+        xmlns:converters="using:WeatherApp.Converters"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="WeatherApp.MainWindow"
+        Title="WeatherApp">
+    <Window.Resources>
+        <converters:WeatherIconConverter x:Key="WeatherIconConverter"/>
+    </Window.Resources>
+    <TabControl>
+        <!-- City Search Tab -->
+        <TabItem Header="City Search">
+            <Grid RowDefinitions="Auto,*">
+                <StackPanel Grid.Row="0" Margin="20">
+                    <TextBox x:Name="CitySearchBox" 
+                            Watermark="Enter city name..."
+                            Margin="0,0,0,10"/>
+                    <Button Content="Search"
+                            HorizontalAlignment="Center"
+                            Click="OnSearchClick"/>
+                </StackPanel>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel x:Name="WeatherPanel" 
+                              Margin="20"
+                              IsVisible="False">
+                        <!-- City Info -->
+                        <TextBlock x:Name="CityNameText"
+                                 FontSize="24"
+                                 FontWeight="Bold"
+                                 Margin="0,0,0,5"/>
+                        <TextBlock x:Name="CoordinatesText"
+                                 FontSize="14"
+                                 Margin="0,0,0,10"/>
+                        
+                        <!-- Current Weather -->
+                        <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,20">
+                            <Image x:Name="WeatherIcon"
+                                   Source="{Binding WeatherIcon, Converter={StaticResource WeatherIconConverter}}"
+                                   Width="64" Height="64"
+                                   Grid.Column="0"
+                                   Margin="0,0,20,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock x:Name="TemperatureText"
+                                         FontSize="36"/>
+                                <TextBlock x:Name="DescriptionText"
+                                         FontSize="18"/>
+                                <TextBlock x:Name="HumidityText"
+                                         FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+        
+        <!-- 5-Day Forecast Tab -->
+        <TabItem Header="5-Day Forecast">
+            <ScrollViewer>
+                <ItemsControl x:Name="DailyForecastListDetailed"
+                              ItemsSource="{Binding DailyForecasts}"
+                              x:DataType="models:WeatherData"
+                              Margin="20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:DailyForecast">
+                            <Border BorderBrush="{DynamicResource SystemBaseMediumColor}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Margin="5"
+                                    Padding="10">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Date, StringFormat={}{0:MMM dd}}"
+                                             FontWeight="Bold"
+                                             HorizontalAlignment="Center"
+                                             Margin="0,0,0,5"/>
+                                    <TextBlock Text="12:00"
+                                             HorizontalAlignment="Center"
+                                             Margin="0,0,0,10"/>
+                                    <Image Width="50" Height="50"
+                                           Source="{Binding WeatherIcon, Converter={StaticResource WeatherIconConverter}}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,10"/>
+                                    <TextBlock Text="{Binding Temperature, StringFormat={}{0:F1}°C}"
+                                             FontSize="20"
+                                             HorizontalAlignment="Center"
+                                             Margin="0,0,0,5"/>
+                                    <TextBlock Text="{Binding Description}"
+                                             TextWrapping="Wrap"
+                                             HorizontalAlignment="Center"
+                                             Margin="0,0,0,5"/>
+                                    <TextBlock Text="{Binding Humidity, StringFormat=Humidity: {0}%}"
+                                             HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </TabItem>
+        
+        <!-- Settings Tab -->
+        <TabItem Header="Settings">
+            <StackPanel Margin="20">
+                <TextBlock Text="Default City"
+                         Margin="0,0,0,5"/>
+                <TextBox x:Name="DefaultCityBox"
+                        Watermark="Enter default city..."
+                        Margin="0,0,0,20"/>
+                
+                <TextBlock Text="Language"
+                         Margin="0,0,0,5"/>
+                <ComboBox x:Name="LanguageComboBox"
+                         Margin="0,0,0,20">
+                    <ComboBoxItem Content="English" Tag="en"/>
+                    <ComboBoxItem Content="French" Tag="fr"/>
+                    <ComboBoxItem Content="German" Tag="de"/>
+                    <ComboBoxItem Content="Spanish" Tag="es"/>
+                </ComboBox>
+                
+                <TextBlock Text="Theme"
+                         Margin="0,0,0,5"/>
+                <ComboBox x:Name="ThemeComboBox"
+                         Margin="0,0,0,20">
+                    <ComboBoxItem Content="System Default" Tag="Default"/>
+                    <ComboBoxItem Content="Light" Tag="Light"/>
+                    <ComboBoxItem Content="Dark" Tag="Dark"/>
+                </ComboBox>
+                
+                <Button Content="Save Settings"
+                        Click="OnSaveSettingsClick"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>
