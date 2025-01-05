@@ -54,10 +54,8 @@ public class WeatherService
             
             if (data == null) return null;
             
-            // Debug output for weather icon
             System.Diagnostics.Debug.WriteLine($"Current weather icon from API: {data.Current.Weather[0].Icon}");
             
-            // Get city name from reverse geocoding
             var geoResponse = await _httpClient.GetStringAsync(
                 $"https://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit=1&appid={_apiKey}");
             var geoData = JsonConvert.DeserializeObject<GeocodingResult[]>(geoResponse);
@@ -71,7 +69,7 @@ public class WeatherService
                 Temperature = data.Current.Temp,
                 Description = data.Current.Weather[0].Description,
                 Humidity = data.Current.Humidity,
-                WeatherIcon = data.Current.Weather[0].Icon, // Make sure this is being set
+                WeatherIcon = data.Current.Weather[0].Icon, 
                 
                 HourlyForecasts = data.Hourly
                     .Take(6)
@@ -80,7 +78,7 @@ public class WeatherService
                         DateTime = DateTimeOffset.FromUnixTimeSeconds(h.Dt).DateTime,
                         Temperature = h.Temp,
                         Humidity = h.Humidity,
-                        WeatherIcon = h.Weather[0].Icon // Make sure this is being set
+                        WeatherIcon = h.Weather[0].Icon 
                     })
                     .ToArray(),
                 
@@ -92,13 +90,12 @@ public class WeatherService
                         Date = DateTimeOffset.FromUnixTimeSeconds(d.Dt).DateTime.Date.AddHours(12),
                         Temperature = d.Temp.Day,
                         Humidity = d.Humidity,
-                        WeatherIcon = d.Weather[0].Icon, // Make sure this is being set
+                        WeatherIcon = d.Weather[0].Icon, 
                         Description = d.Weather[0].Description
                     })
                     .ToArray()
             };
 
-            // Debug output
             System.Diagnostics.Debug.WriteLine($"Current Weather Icon: {weatherData.WeatherIcon}");
             foreach (var forecast in weatherData.DailyForecasts)
             {

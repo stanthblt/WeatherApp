@@ -35,15 +35,12 @@ public partial class MainWindow : Window
 
         _weatherService = new WeatherService(_currentSettings.ApiKey);
         
-        // Apply loaded settings to UI
         DefaultCityBox.Text = _currentSettings.DefaultCity;
         LanguageComboBox.SelectedIndex = GetLanguageIndex(_currentSettings.Language);
         ThemeComboBox.SelectedIndex = GetThemeIndex(_currentSettings.Theme);
         
-        // Apply theme immediately
         ApplyTheme(_currentSettings.Theme);
 
-        // If default city is set, load its weather
         if (!string.IsNullOrEmpty(_currentSettings.DefaultCity))
         {
             CitySearchBox.Text = _currentSettings.DefaultCity;
@@ -84,7 +81,6 @@ public partial class MainWindow : Window
             Spacing = 20
         };
 
-        // Title
         var titleBlock = new TextBlock
         {
             Text = "Welcome to WeatherApp",
@@ -95,7 +91,6 @@ public partial class MainWindow : Window
             Margin = new Thickness(0, 0, 0, 8)
         };
 
-        // Subtitle
         var subtitleBlock = new TextBlock
         {
             Text = "Please enter your OpenWeatherMap API key to get started:",
@@ -105,7 +100,6 @@ public partial class MainWindow : Window
             Margin = new Thickness(0, 0, 0, 16)
         };
 
-        // TextBox
         var textBox = new TextBox
         {
             Watermark = "Enter your API key...",
@@ -117,7 +111,6 @@ public partial class MainWindow : Window
             Margin = new Thickness(0, 0, 0, 16)
         };
 
-        // Button
         var button = new Button
         {
             Content = "Continue",
@@ -133,7 +126,6 @@ public partial class MainWindow : Window
             VerticalContentAlignment = VerticalAlignment.Center
         };
 
-        // Link Panel
         var linkPanel = new StackPanel
         {
             Orientation = Orientation.Horizontal,
@@ -177,7 +169,6 @@ public partial class MainWindow : Window
             }
             else
             {
-                // Show error state
                 textBox.BorderBrush = new SolidColorBrush(Color.Parse("#FF3B30"));
             }
         };
@@ -202,7 +193,6 @@ public partial class MainWindow : Window
         var cityName = CitySearchBox?.Text;
         if (string.IsNullOrWhiteSpace(cityName))
         {
-            // Show error message to user
             return;
         }
         await LoadWeatherDataAsync(cityName);
@@ -218,7 +208,6 @@ public partial class MainWindow : Window
         var coordinates = await _weatherService.GetCityCoordinatesAsync(cityName);
         if (coordinates == null)
         {
-            // Show error message
             return;
         }
 
@@ -229,11 +218,9 @@ public partial class MainWindow : Window
             
         if (weatherData == null)
         {
-            // Show error message
             return;
         }
 
-        // Update UI with weather data
         WeatherPanel.IsVisible = true;
         UpdateWeatherDisplay(weatherData);
     }
@@ -252,7 +239,6 @@ public partial class MainWindow : Window
         await _settingsService.SaveSettingsAsync(settings);
         _currentSettings = settings;
 
-        // Apply theme immediately after saving
         ApplyTheme(newTheme);
     }
 
@@ -275,7 +261,7 @@ public partial class MainWindow : Window
             "fr" => 1,
             "de" => 2,
             "es" => 3,
-            _ => 0 // "en" or default
+            _ => 0 
         };
     }
 
@@ -285,7 +271,7 @@ public partial class MainWindow : Window
         {
             "Light" => 1,
             "Dark" => 2,
-            _ => 0 // "Default"
+            _ => 0 
         };
     }
 
@@ -309,11 +295,9 @@ public partial class MainWindow : Window
         Console.WriteLine($"Updating weather display...");
         Console.WriteLine($"Current weather icon code: {weatherData.WeatherIcon}");
         
-        // Update city info
         CityNameText.Text = weatherData.CityName;
         CoordinatesText.Text = $"Lat: {weatherData.Latitude:F2}, Lon: {weatherData.Longitude:F2}";
         
-        // Update current weather
         if (_weatherService != null)
         {
             Console.WriteLine("Getting weather icon stream...");
@@ -341,10 +325,8 @@ public partial class MainWindow : Window
         DescriptionText.Text = weatherData.Description;
         HumidityText.Text = $"Humidity: {weatherData.Humidity}%";
 
-        // Update forecasts using DataContext
         DailyForecastListDetailed.DataContext = weatherData;
 
-        // Make the panel visible
         WeatherPanel.IsVisible = true;
     }
 }

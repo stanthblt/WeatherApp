@@ -14,7 +14,6 @@
     </Window.Resources>
 
     <Window.Styles>
-        <!-- Base styles that change with theme -->
         <Style Selector="Window">
             <Setter Property="Background" Value="{DynamicResource SystemAltHighColor}"/>
         </Style>
@@ -99,7 +98,6 @@
         </ExperimentalAcrylicBorder>
 
         <TabControl Margin="0" Padding="0">
-            <!-- City Search Tab -->
             <TabItem Header="City Search">
                 <Grid RowDefinitions="Auto,*">
                     <Border Classes="card" Margin="20,30,20,0">
@@ -128,7 +126,6 @@
                                              Classes="subtitle"
                                              Margin="0,0,0,24"/>
                                     
-                                    <!-- Current Weather -->
                                     <Grid ColumnDefinitions="Auto,*" 
                                           Margin="0,0,0,20"
                                           x:DataType="models:WeatherData">
@@ -158,7 +155,6 @@
                 </Grid>
             </TabItem>
             
-            <!-- 5-Day Forecast Tab -->
             <TabItem Header="5-Day Forecast">
                 <ScrollViewer>
                     <ItemsControl x:Name="DailyForecastListDetailed"
@@ -211,7 +207,6 @@
                 </ScrollViewer>
             </TabItem>
             
-            <!-- Settings Tab -->
             <TabItem Header="Settings">
                 <ScrollViewer>
                     <Border Classes="card" Margin="20">

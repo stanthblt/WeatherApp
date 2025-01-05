@@ -14,10 +14,8 @@ public class SettingsService
     
     public SettingsService()
     {
-        // Get the directory where the executable is located
         string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         
-        // Go up two levels from bin/Debug/net9.0 to reach the project root
         string projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, "..", ".."));
         
         _settingsPath = Path.Combine(projectDirectory, SettingsFileName);
@@ -52,7 +50,7 @@ public class SettingsService
         }
         catch (Exception)
         {
-            // Log error or handle appropriately
+            //ignore
         }
     }
 } 
