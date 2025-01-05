@@ -5,10 +5,10 @@
 ## Sommaire
 
 - [Fonctionnalités](#fonctionnalités)
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Structure du projet](#structure-du-projet)
-- [Auteurs](#auteurs)
+- [Prérequis](#prérequis-📋)
+- [Installation](#installation-🛠️)
+- [Structure du projet](#structure-du-projet-📂)
+
 
 
 ## Fonctionnalités 
