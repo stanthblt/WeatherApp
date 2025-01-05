@@ -5,9 +5,9 @@
 ## Sommaire
 
 - [Fonctionnalités](#fonctionnalités)
-- [Prérequis](#prérequis-📋)
-- [Installation](#installation-🛠️)
-- [Structure du projet](#structure-du-projet-📂)
+- [Prérequis](#prérequis)
+- [Installation](#installation)
+- [Structure du projet](#structure-du-projet)
 
 
 
@@ -22,7 +22,7 @@
 
 ---
 
-## Prérequis 📋
+## Prérequis
 
 - [**.NET 9.0 SDK**](https://dotnet.microsoft.com/download/dotnet/9.0) ou version supérieure.
 - Un éditeur de code comme [**Visual Studio**](https://visualstudio.microsoft.com/) ou [**VS Code**](https://code.visualstudio.com/) avec les extensions nécessaires pour .NET.
@@ -30,7 +30,7 @@
 
 ---
 
-## Installation 🛠️
+## Installation
 
 1. **Clonez ce dépôt** :
    ```bash
@@ -53,7 +53,7 @@
    ```
 5. Entrez votre clé API dans la fenêtre qui s'affiche
 
-## Structure du projet 📂
+## Structure du projet
 
 - **App.axaml** : Fichier principal de l'interface utilisateur.
 - **App.axaml.cs** : Logique derrière le fichier `App.axaml`.
