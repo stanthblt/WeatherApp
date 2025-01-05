@@ -2,6 +2,15 @@
 
 **WeatherApp** est une application de bureau utilisant le framework **Avalonia** pour afficher des informations météorologiques en temps réel grâce à l'API de **OpenWeatherMap**.
 
+## Sommaire
+
+- [Fonctionnalités](#fonctionnalités)
+- [Prérequis](#prérequis)
+- [Installation](#installation)
+- [Structure du projet](#structure-du-projet)
+
+
+
 ## Fonctionnalités 
 
 - **Affichage en temps réel des informations météorologiques** : L'application récupère les données météorologiques et les affiche dans une interface utilisateur simple et moderne.
@@ -13,7 +22,7 @@
 
 ---
 
-## Prérequis 📋
+## Prérequis
 
 - [**.NET 9.0 SDK**](https://dotnet.microsoft.com/download/dotnet/9.0) ou version supérieure.
 - Un éditeur de code comme [**Visual Studio**](https://visualstudio.microsoft.com/) ou [**VS Code**](https://code.visualstudio.com/) avec les extensions nécessaires pour .NET.
@@ -21,7 +30,7 @@
 
 ---
 
-## Installation 🛠️
+## Installation
 
 1. **Clonez ce dépôt** :
    ```bash
@@ -44,7 +53,7 @@
    ```
 5. Entrez votre clé API dans la fenêtre qui s'affiche
 
-## Structure du projet 📂
+## Structure du projet
 
 - **App.axaml** : Fichier principal de l'interface utilisateur.
 - **App.axaml.cs** : Logique derrière le fichier `App.axaml`.
@@ -53,5 +62,7 @@
 - **Models** : Contient les classes représentant les données de l'application, comme `AppSettings.cs` et `WeatherData.cs`.
 - **Services** : Contient les services responsables de la récupération des données météorologiques et de la gestion des paramètres.
 
-Ce projet a été réalisé dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
-Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanilas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
+
+Cette application a été réalisé lors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
+
+Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanislas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
