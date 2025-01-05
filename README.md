@@ -34,7 +34,7 @@
 
 1. **Clonez ce dépôt** :
    ```bash
-   git clone https://votre-depot.git
+   git clone https://github.com/stanthblt/WeatherApp
    cd WeatherApp
 
 2. Restaurez les dépendances :
@@ -62,5 +62,9 @@
 - **Models** : Contient les classes représentant les données de l'application, comme `AppSettings.cs` et `WeatherData.cs`.
 - **Services** : Contient les services responsables de la récupération des données météorologiques et de la gestion des paramètres.
 
+<<<<<<< HEAD
 Cette application a été réalisé lors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
+=======
+Ce projet a été réalisé dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
+>>>>>>> 27291e107be421cad97e7bfd9331cc8f8088e423
 Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanilas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
