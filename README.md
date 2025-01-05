@@ -7,11 +7,12 @@
 - [Fonctionnalités](#fonctionnalités)
 - [Prérequis](#prérequis)
 - [Installation](#installation)
+- [Utilisation](#utilisation)
 - [Structure du projet](#structure-du-projet)
 
 
 
-## Fonctionnalités 
+## Fonctionnalités
 
 - **Affichage en temps réel des informations météorologiques** : L'application récupère les données météorologiques et les affiche dans une interface utilisateur simple et moderne.
 - **Icônes dynamiques** : Les icônes des conditions météorologiques changent en fonction des données reçues.
@@ -53,6 +54,19 @@
    ```
 5. Entrez votre clé API dans la fenêtre qui s'affiche
 
+---
+
+## Utilisation
+
+1. **Clé API** : Lors du premier lancement entrez votre clé API OpenWeatherMap dans la fenêtre qui s'affiche lors du lancement de l'application.
+2. **Interface utilisateur** : L'interface utilisateur est simple et intuitive. Vous pouvez voir les informations météorologiques de la ville par défaut ou chercher une autre ville dans la search bar .
+3. **Thèmes** : Vous pouvez choisir entre un thème sombre et un thème clair en choisisant dans la page Settings.
+4. **Langues** : Vous pouvez choisir entre 5 langues différentes pour l'application en choisisant dans la page Settings.
+5. **Ville par défaut** : Vous pouvez choisir une ville par défaut depuis la page Settings la météo de cette ville sera affiché par défaut et enregistré par l'aplication .
+6. **Météo à 5 jours** : Vous pouvez voir la météo des 5 prochains jours en cliquant sur l'onglet "5 days forecast".
+
+---
+
 ## Structure du projet
 
 - **App.axaml** : Fichier principal de l'interface utilisateur.
@@ -63,6 +77,6 @@
 - **Services** : Contient les services responsables de la récupération des données météorologiques et de la gestion des paramètres.
 
 
-Cette application a été réalisé lors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
+Cette application a été réalisé lors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)
 
 Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanislas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
