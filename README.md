@@ -65,4 +65,4 @@
 
 Cette application a été réalisé lors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
 
-Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanilas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
+Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanislas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
