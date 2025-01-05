@@ -11,7 +11,7 @@ WeatherApp est une application de bureau utilisant le framework Avalonia pour af
 
 1. Clonez ce dépôt :
    ```bash
-   git clone https://votre-depot.git
+   git clone https://github.com/stanthblt/WeatherApp
    cd WeatherApp
    ```
 
