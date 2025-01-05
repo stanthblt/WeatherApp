@@ -56,21 +56,115 @@ public partial class MainWindow : Window
         var dialog = new Window
         {
             Title = "OpenWeatherMap API Key",
-            Width = 400,
-            Height = 150,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner
+            Width = 600,
+            Height = 320,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Background = new SolidColorBrush(Colors.Transparent),
+            SystemDecorations = SystemDecorations.None,
+            CanResize = false
         };
 
-        var layout = new StackPanel { Margin = new Thickness(20) };
-        var textBox = new TextBox 
-        { 
-            Watermark = "Enter your API key...",
-            Margin = new Thickness(0, 0, 0, 10)
+        var mainBorder = new Border
+        {
+            Background = new SolidColorBrush(Color.FromArgb(245, 28, 28, 30)),
+            CornerRadius = new CornerRadius(16),
+            BoxShadow = new BoxShadows(new BoxShadow
+            {
+                OffsetX = 0,
+                OffsetY = 8,
+                Blur = 32,
+                Color = Color.FromArgb(80, 0, 0, 0)
+            }),
+            Margin = new Thickness(20)
         };
-        var button = new Button 
+
+        var layout = new StackPanel 
         { 
-            Content = "Save",
-            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
+            Margin = new Thickness(32),
+            Spacing = 20
+        };
+
+        // Title
+        var titleBlock = new TextBlock
+        {
+            Text = "Welcome to WeatherApp",
+            FontSize = 24,
+            FontWeight = FontWeight.SemiBold,
+            Foreground = new SolidColorBrush(Colors.White),
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(0, 0, 0, 8)
+        };
+
+        // Subtitle
+        var subtitleBlock = new TextBlock
+        {
+            Text = "Please enter your OpenWeatherMap API key to get started:",
+            TextWrapping = TextWrapping.Wrap,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Foreground = new SolidColorBrush(Color.Parse("#999999")),
+            Margin = new Thickness(0, 0, 0, 16)
+        };
+
+        // TextBox
+        var textBox = new TextBox
+        {
+            Watermark = "Enter your API key...",
+            Height = 50,
+            CornerRadius = new CornerRadius(12),
+            BorderBrush = new SolidColorBrush(Color.Parse("#333333")),
+            Background = new SolidColorBrush(Color.Parse("#1C1C1E")),
+            Foreground = new SolidColorBrush(Colors.White),
+            Margin = new Thickness(0, 0, 0, 16)
+        };
+
+        // Button
+        var button = new Button
+        {
+            Content = "Continue",
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Width = 200,
+            Height = 44,
+            CornerRadius = new CornerRadius(22),
+            Background = new SolidColorBrush(Color.Parse("#0A84FF")),
+            Foreground = new SolidColorBrush(Colors.White),
+            FontWeight = FontWeight.SemiBold,
+            Margin = new Thickness(0, -8, 0, 0),
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            VerticalContentAlignment = VerticalAlignment.Center
+        };
+
+        // Link Panel
+        var linkPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(0, 16, 0, 0)
+        };
+
+        var linkText = new TextBlock
+        {
+            Text = "Don't have an API key? ",
+            Foreground = new SolidColorBrush(Color.Parse("#999999")),
+            VerticalAlignment = VerticalAlignment.Center
+        };
+
+        var link = new Button
+        {
+            Content = "Get one here",
+            Foreground = new SolidColorBrush(Color.Parse("#0A84FF")),
+            Background = new SolidColorBrush(Colors.Transparent),
+            Padding = new Thickness(4, 0),
+            VerticalAlignment = VerticalAlignment.Center
+        };
+
+        link.Click += (s, e) =>
+        {
+            var psi = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://openweathermap.org/api",
+                UseShellExecute = true
+            };
+            System.Diagnostics.Process.Start(psi);
         };
 
         button.Click += async (s, e) =>
@@ -81,17 +175,25 @@ public partial class MainWindow : Window
                 await _settingsService.SaveSettingsAsync(_currentSettings);
                 dialog.Close();
             }
+            else
+            {
+                // Show error state
+                textBox.BorderBrush = new SolidColorBrush(Color.Parse("#FF3B30"));
+            }
         };
 
-        layout.Children.Add(new TextBlock 
-        { 
-            Text = "Please enter your OpenWeatherMap API key:",
-            Margin = new Thickness(0, 0, 0, 10)
-        });
+        linkPanel.Children.Add(linkText);
+        linkPanel.Children.Add(link);
+
+        layout.Children.Add(titleBlock);
+        layout.Children.Add(subtitleBlock);
         layout.Children.Add(textBox);
         layout.Children.Add(button);
+        layout.Children.Add(linkPanel);
 
-        dialog.Content = layout;
+        mainBorder.Child = layout;
+        dialog.Content = mainBorder;
+
         await dialog.ShowDialog(this);
     }
 
