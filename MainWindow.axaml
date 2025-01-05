@@ -8,50 +8,119 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WeatherApp.MainWindow"
         Title="WeatherApp">
+
     <Window.Resources>
         <converters:WeatherIconConverter x:Key="WeatherIconConverter"/>
     </Window.Resources>
-    <TabControl>
+
+    <Window.Styles>
+        <!-- Base styles that change with theme -->
+        <Style Selector="Window">
+            <Setter Property="Background" Value="{DynamicResource SystemAltHighColor}"/>
+        </Style>
+        
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource SystemChromeMediumColor}"/>
+            <Setter Property="BoxShadow" Value="0 2 10 0 #20000000"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="{DynamicResource SystemChromeMediumColor}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseMediumColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource SystemChromeMediumColor}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseMediumColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseMediumColor}"/>
+        </Style>
+
+        <Style Selector="TabItem:selected">
+            <Setter Property="Foreground" Value="#007AFF"/>
+        </Style>
+
+        <Style Selector="TextBlock.title">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColor}"/>
+        </Style>
+
+        <Style Selector="TextBlock.subtitle">
+            <Setter Property="Foreground" Value="{DynamicResource SystemBaseMediumColor}"/>
+        </Style>
+    </Window.Styles>
+
+    <TabControl Margin="0" Padding="0">
         <!-- City Search Tab -->
         <TabItem Header="City Search">
             <Grid RowDefinitions="Auto,*">
-                <StackPanel Grid.Row="0" Margin="20">
+                <StackPanel Grid.Row="0" Margin="20,30,20,20">
                     <TextBox x:Name="CitySearchBox" 
                             Watermark="Enter city name..."
-                            Margin="0,0,0,10"/>
+                            Height="40"
+                            CornerRadius="10"
+                            BorderThickness="1"
+                            Margin="0,0,0,15"/>
                     <Button Content="Search"
+                            Height="40"
+                            Width="120"
                             HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#007AFF"
+                            Foreground="White"
+                            CornerRadius="20"
                             Click="OnSearchClick"/>
                 </StackPanel>
                 <ScrollViewer Grid.Row="1">
                     <StackPanel x:Name="WeatherPanel" 
                               Margin="20"
                               IsVisible="False">
-                        <!-- City Info -->
-                        <TextBlock x:Name="CityNameText"
-                                 FontSize="24"
-                                 FontWeight="Bold"
-                                 Margin="0,0,0,5"/>
-                        <TextBlock x:Name="CoordinatesText"
-                                 FontSize="14"
-                                 Margin="0,0,0,10"/>
-                        
-                        <!-- Current Weather -->
-                        <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,20">
-                            <Image x:Name="WeatherIcon"
-                                   Source="{Binding WeatherIcon, Converter={StaticResource WeatherIconConverter}}"
-                                   Width="64" Height="64"
-                                   Grid.Column="0"
-                                   Margin="0,0,20,0"/>
-                            <StackPanel Grid.Column="1">
-                                <TextBlock x:Name="TemperatureText"
-                                         FontSize="36"/>
-                                <TextBlock x:Name="DescriptionText"
-                                         FontSize="18"/>
-                                <TextBlock x:Name="HumidityText"
-                                         FontSize="16"/>
+                        <Border Classes="card"
+                                CornerRadius="15"
+                                Padding="20">
+                            <StackPanel>
+                                <TextBlock x:Name="CityNameText"
+                                         Classes="title"
+                                         FontSize="28"
+                                         Margin="0,0,0,5"/>
+                                <TextBlock x:Name="CoordinatesText"
+                                         Classes="subtitle"
+                                         FontSize="14"
+                                         Margin="0,0,0,20"/>
+                                
+                                <!-- Current Weather -->
+                                <Grid ColumnDefinitions="Auto,*" 
+                                      Margin="0,0,0,20"
+                                      x:DataType="models:WeatherData">
+                                    <Image x:Name="WeatherIcon"
+                                           Source="{Binding WeatherIcon, Converter={StaticResource WeatherIconConverter}}"
+                                           Width="80" Height="80"
+                                           Grid.Column="0"
+                                           Margin="0,0,20,0"/>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock x:Name="TemperatureText"
+                                                 Classes="title"
+                                                 FontSize="42"
+                                                 FontWeight="Light"/>
+                                        <TextBlock x:Name="DescriptionText"
+                                                 Classes="title"
+                                                 FontSize="18"/>
+                                        <TextBlock x:Name="HumidityText"
+                                                 Classes="subtitle"
+                                                 FontSize="16"/>
+                                    </StackPanel>
+                                </Grid>
                             </StackPanel>
-                        </Grid>
+                        </Border>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
@@ -71,32 +140,38 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:DailyForecast">
-                            <Border BorderBrush="{DynamicResource SystemBaseMediumColor}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
+                            <Border Classes="card"
+                                    BorderThickness="0"
+                                    CornerRadius="12"
                                     Margin="5"
-                                    Padding="10">
+                                    Padding="15">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Date, StringFormat={}{0:MMM dd}}"
-                                             FontWeight="Bold"
+                                             Classes="title"
+                                             FontSize="16"
                                              HorizontalAlignment="Center"
                                              Margin="0,0,0,5"/>
                                     <TextBlock Text="12:00"
+                                             Classes="subtitle"
                                              HorizontalAlignment="Center"
                                              Margin="0,0,0,10"/>
-                                    <Image Width="50" Height="50"
+                                    <Image Width="60" Height="60"
                                            Source="{Binding WeatherIcon, Converter={StaticResource WeatherIconConverter}}"
                                            HorizontalAlignment="Center"
                                            Margin="0,0,0,10"/>
                                     <TextBlock Text="{Binding Temperature, StringFormat={}{0:F1}°C}"
-                                             FontSize="20"
+                                             Classes="title"
+                                             FontSize="24"
+                                             FontWeight="Light"
                                              HorizontalAlignment="Center"
                                              Margin="0,0,0,5"/>
                                     <TextBlock Text="{Binding Description}"
+                                             Classes="subtitle"
                                              TextWrapping="Wrap"
                                              HorizontalAlignment="Center"
                                              Margin="0,0,0,5"/>
                                     <TextBlock Text="{Binding Humidity, StringFormat=Humidity: {0}%}"
+                                             Classes="subtitle"
                                              HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
@@ -108,17 +183,27 @@
         
         <!-- Settings Tab -->
         <TabItem Header="Settings">
-            <StackPanel Margin="20">
+            <StackPanel Margin="30">
                 <TextBlock Text="Default City"
-                         Margin="0,0,0,5"/>
+                         Classes="title"
+                         FontSize="16"
+                         Margin="0,0,0,8"/>
                 <TextBox x:Name="DefaultCityBox"
+                        Height="40"
+                        CornerRadius="10"
+                        BorderThickness="1"
                         Watermark="Enter default city..."
-                        Margin="0,0,0,20"/>
+                        Margin="0,0,0,25"/>
                 
                 <TextBlock Text="Language"
-                         Margin="0,0,0,5"/>
+                         Classes="title"
+                         FontSize="16"
+                         Margin="0,0,0,8"/>
                 <ComboBox x:Name="LanguageComboBox"
-                         Margin="0,0,0,20">
+                         Height="40"
+                         CornerRadius="10"
+                         BorderThickness="1"
+                         Margin="0,0,0,25">
                     <ComboBoxItem Content="English" Tag="en"/>
                     <ComboBoxItem Content="French" Tag="fr"/>
                     <ComboBoxItem Content="German" Tag="de"/>
@@ -126,15 +211,28 @@
                 </ComboBox>
                 
                 <TextBlock Text="Theme"
-                         Margin="0,0,0,5"/>
+                         Classes="title"
+                         FontSize="16"
+                         Margin="0,0,0,8"/>
                 <ComboBox x:Name="ThemeComboBox"
-                         Margin="0,0,0,20">
+                         Height="40"
+                         CornerRadius="10"
+                         BorderThickness="1"
+                         Margin="0,0,0,30">
                     <ComboBoxItem Content="System Default" Tag="Default"/>
                     <ComboBoxItem Content="Light" Tag="Light"/>
                     <ComboBoxItem Content="Dark" Tag="Dark"/>
                 </ComboBox>
                 
                 <Button Content="Save Settings"
+                        Height="44"
+                        Width="160"
+                        Background="#007AFF"
+                        Foreground="White"
+                        CornerRadius="22"
+                        FontSize="16"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
                         Click="OnSaveSettingsClick"
                         HorizontalAlignment="Center"/>
             </StackPanel>
