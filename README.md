@@ -53,5 +53,5 @@
 - **Models** : Contient les classes représentant les données de l'application, comme `AppSettings.cs` et `WeatherData.cs`.
 - **Services** : Contient les services responsables de la récupération des données météorologiques et de la gestion des paramètres.
 
-Ce projet a été réalisé l'ors d'un projet dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
-Il a été réalisé par [**Chort MAxime**](https://github.com/Slaaaayz), [**Thabault Stanilass**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
+Ce projet a été réalisé dans le cadre de nos études a [Bordeaux Ynov Campus](https://www.ynov.com/campus/bordeaux)  
+Il a été réalisé par [**Chort Maxime**](https://github.com/Slaaaayz), [**Thabault Stanilas**](https://github.com/stanthblt/) et [**Prigent Nicolas**](https://github.com/nicoocaa)
